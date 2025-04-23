@@ -1,0 +1,21 @@
+<div class="custom-dropdown">
+  <label ng-if="$ctrl.label" class="dropdown-label">{{$ctrl.label}}</label>
+  <div class="dropdown-container" ng-class="{'is-open': $ctrl.isOpen}">
+    <div 
+    class="dropdown-header" 
+    ng-click="$ctrl.toggleDropdown($event)"
+    app-error 
+            error-message="This field is required" 
+    >
+      <span class="selected-option">{{$ctrl.selected || 'Select...'}}</span>
+      <span class="dropdown-arrow"></span>
+    </div>
+    <div class="dropdown-options" ng-show="$ctrl.isOpen">
+      <div class="dropdown-option" 
+           ng-repeat="option in $ctrl.options"
+           ng-click="$ctrl.selectOption(option)">
+        {{option}}
+      </div>
+    </div>
+  </div>
+</div> 

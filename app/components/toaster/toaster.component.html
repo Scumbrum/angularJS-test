@@ -1,0 +1,5 @@
+<div class="toaster" ng-if="$ctrl.isVisible" ng-class="{'toaster--success': $ctrl.type === 'success', 'toaster--error': $ctrl.type === 'error'}">
+  <div class="toaster__content">
+    <span class="toaster__message">{{$ctrl.message}}</span>
+  </div>
+</div> 

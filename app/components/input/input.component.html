@@ -1,0 +1,21 @@
+<div class="input-wrapper">
+    <label ng-if="$ctrl.label" for="{{$ctrl.inputId}}" class="input-label">
+        {{$ctrl.label}}
+        <span ng-if="$ctrl.isRequired" class="required-marker">*</span>
+    </label>
+    
+    <div class="input-field-wrapper">
+        <input
+            app-error 
+            error-message="This field is required"  
+            id="{{$ctrl.inputId}}"
+            name="{{$ctrl.name}}"
+            type="{{$ctrl.getInputType()}}"
+            ng-model="$ctrl.model"
+            ng-required="$ctrl.isRequired"
+            placeholder="{{$ctrl.placeholder}}"
+            class="input-field"
+        >
+    </div>
+
+</div> 

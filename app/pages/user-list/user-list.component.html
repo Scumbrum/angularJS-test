@@ -1,0 +1,88 @@
+<div class="user-list-page">
+<!-- 
+     Add User Form 
+    <div class="user-form" ng-if="!$ctrl.isEditing">
+        <h3>Add New User</h3>
+        <form ng-submit="$ctrl.addUser()">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" ng-model="$ctrl.newUser.username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" ng-model="$ctrl.newUser.firstName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" ng-model="$ctrl.newUser.lastName" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" ng-model="$ctrl.newUser.email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="type">Type:</label>
+                <select id="type" ng-model="$ctrl.newUser.type">
+                    <option value="User">User</option>
+                    <option value="Administrator">Administrator</option>
+                    <option value="Editor">Editor</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="btn-add">Add User</button>
+        </form>
+    </div>
+
+   
+    <div class="user-form" ng-if="$ctrl.isEditing">
+        <h3>Edit User</h3>
+        <form ng-submit="$ctrl.updateUser()">
+            <div class="form-group">
+                <label for="editUsername">Username:</label>
+                <input type="text" id="editUsername" ng-model="$ctrl.editingUser.username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="editFirstName">First Name:</label>
+                <input type="text" id="editFirstName" ng-model="$ctrl.editingUser.firstName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="editLastName">Last Name:</label>
+                <input type="text" id="editLastName" ng-model="$ctrl.editingUser.lastName" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="editEmail">Email:</label>
+                <input type="email" id="editEmail" ng-model="$ctrl.editingUser.email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="editType">Type:</label>
+                <select id="editType" ng-model="$ctrl.editingUser.type">
+                    <option value="User">User</option>
+                    <option value="Administrator">Administrator</option>
+                    <option value="Editor">Editor</option>
+                </select>
+            </div>
+            
+            <div class="button-group">
+                <button type="submit" class="btn-save">Save Changes</button>
+                <button type="button" class="btn-cancel" ng-click="$ctrl.cancelEdit()">Cancel</button>
+            </div>
+        </form>
+    </div> -->
+    <div class="users__table">
+        <custom-button>Create User</custom-button>
+        <table-component 
+            data="$ctrl.users" 
+            columns="$ctrl.columns">
+        </table-component>
+    </div>
+    
+    
+</div> 

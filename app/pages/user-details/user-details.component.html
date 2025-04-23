@@ -1,0 +1,82 @@
+<div class="user-list-page">
+    <div class="users__table">
+        <custom-button>Create User</custom-button>
+        <table-component 
+            data="$ctrl.users" 
+            columns="$ctrl.columns">
+        </table-component>
+    </div>
+
+    <div class="users__details">
+        <div class="modal-header">
+            <h2>Create new user</h2>
+            <button class="close-button" ng-click="$ctrl.goToList()">×</button>
+        </div>
+
+        <form class="user-form" name="userForm" ng-submit="$ctrl.saveChanges()" novalidate>
+            <custom-input
+                type="text"
+                name="username"
+                label="Username"
+                model="$ctrl.editedUser.username"
+                required="true"
+                error="$ctrl.errors.username">
+            </custom-input>
+    
+            <custom-input
+                type="text"
+                name="first_name"
+                label="First name"
+                model="$ctrl.editedUser.first_name"
+                required="true"
+                error="$ctrl.errors.first_name">
+            </custom-input>
+    
+            <custom-input
+                type="text"
+                name="last_name"
+                label="Last name"
+                model="$ctrl.editedUser.last_name"
+                required="true"
+                error="$ctrl.errors.last_name">
+            </custom-input>
+    
+            <custom-input
+                type="email"
+                name="email"
+                label="Email"
+                model="$ctrl.editedUser.email"
+                required="true"
+                error="$ctrl.errors.email">
+            </custom-input>
+    
+            <custom-input
+                type="password"
+                name="password"
+                label="Password"
+                model="$ctrl.editedUser.password"
+                required="true"
+                error="$ctrl.errors.password"
+                placeholder="Minimum 8 characters, at least one letter and one number">
+            </custom-input>
+    
+            <custom-dropdown
+                name="user_type"
+                label="User Type"
+                model="$ctrl.editedUser.user_type"
+                required="true"
+                options="$ctrl.typeOptions"
+                error="$ctrl.errors.user_type">
+            </custom-dropdown>
+    
+            <div class="form-actions">
+                <custom-button 
+                    size="large"
+                    type="primary" 
+                    on-button-click="$ctrl.saveChanges()">
+                    Create User
+                </custom-button>
+            </div>
+        </form>
+    </div>
+</div> 
