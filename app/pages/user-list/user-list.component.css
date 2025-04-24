@@ -32,6 +32,16 @@ table-component {
     text-align: center;
 }
 
+.users__details {
+    flex: 2;
+    padding: 0 20px 20px;
+    border-radius: 5px;
+    background: white;
+    box-shadow: 3px 2px 18px 0px #e6e5e5;
+    margin-top: 47px;
+    overflow: auto;
+}
+
 .user-table {
     background-color: #f8f9fa;
     padding: 20px;

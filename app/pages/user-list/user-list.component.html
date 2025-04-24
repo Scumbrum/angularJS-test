@@ -27,7 +27,11 @@
         </div>
     </div>
 
-    <div class="users__details" ng-transclude>
+    <div 
+    class="users__details" 
+    ng-show="$ctrl.transcludePresent()" 
+    ng-transclude="slot">
 
     </div>
+    
 </div> 

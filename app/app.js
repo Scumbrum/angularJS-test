@@ -28,7 +28,11 @@ angular.module('myApp', ['ngRoute', 'templates', componentsModule, userListModul
                 template: '<error-page></error-page>'
             })
             .when('/:id', {
-                template: '<user-details-component></user-details-component>',
+                template: `<user-list-component>
+                    <transclude-slot>
+                    <user-details-component></user-details-component>
+                    </transclude-slot>
+                </user-list-component>`,
                 resolve: {
                     resolvedUser: userDetailsResolver
                 }

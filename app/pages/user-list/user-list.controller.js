@@ -1,10 +1,11 @@
 // User List Controller
 export default class UserListController {
-    constructor(userService, toasterService, $location) {
+    constructor(userService, toasterService, $location, $transclude) {
         'ngInject';
         this.userService = userService;
         this.toasterService = toasterService;
         this.$location = $location;
+        this.$transclude = $transclude;
 
         // Initialize controller properties
         this.users = [];
@@ -22,6 +23,10 @@ export default class UserListController {
         // Load users when controller initializes
         this.loadUsers();
     }
+
+    transcludePresent() {
+        return this.$transclude.isSlotFilled('slot');
+    };
 
     selectItem(row) {
         this.$location.path(row.id)

@@ -1,21 +1,5 @@
-<div class="user-list-page">
-    <div class="users__table">
-        <custom-button on-button-click="$ctrl.createUser()">Create User</custom-button>
-        <table-component 
-        ng-if="!$ctrl.isLoading  && $ctrl.users.length"
-        item-clicked="$ctrl.selectItem(row)"
-        data="$ctrl.users" 
-        columns="$ctrl.columns">
-    </table-component>
-    <div class="loading-state" ng-if="$ctrl.isLoading">
-        Loading users...
-    </div>
-    <div class="empty-state" ng-if="!$ctrl.isLoading && !$ctrl.users.length">
-        No users found. Click "Create User" to add one.
-    </div>
-    </div>
 
-    <div class="users__details">
+
         <div class="modal-header">
             <h2 ng-show="!$ctrl.isEditMode">Create new user</h2>
             <h2 ng-show="$ctrl.isEditMode">{{ $ctrl.editedUser.firstName }} {{ $ctrl.editedUser.lastName }}</h2>
@@ -119,5 +103,3 @@
               
             </div>
         </form>
-    </div>
-</div> 
