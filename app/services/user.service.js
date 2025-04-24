@@ -27,42 +27,43 @@ export default class UserService {
     }
 
     _delay(data, delay = 500) {
-        return this.$timeout(() => data, delay);
+        return new Promise((res) => this.$timeout(() => res(data), delay));
     }
 
     getUsers() {
-        return this.$q((resolve) => {
+        return this.$q(async (resolve) => {
             const sanitizedUsers = this.users.map(user => {
                 const { password, ...sanitizedUser } = user;
                 return sanitizedUser;
             });
-            this._delay(sanitizedUsers).then(resolve);
+
+            const data = await this._delay(sanitizedUsers);
+            resolve(data);
         });
     }
 
     getUserById(id) {
-        return this.$q((resolve, reject) => {
+        return this.$q(async (resolve, reject) => {
             const user = this.users.find(u => u.id === id);
             if (user) {
                 const { password, ...sanitizedUser } = user;
-                this._delay(sanitizedUser).then(resolve);
+                const data = await this._delay(sanitizedUser);
+                resolve(data);
             } else {
-                this._delay(null).then(() => {
-                    reject(new Error('User not found'));
-                });
+                await this._delay(null);
+                reject(new Error('User not found'));
             }
         });
     }
 
     createUser(userData) {
-        return this.$q((resolve, reject) => {
+        return this.$q(async (resolve, reject) => {
             const requiredFields = ['username', 'firstName', 'lastName', 'email', 'type', 'password'];
             const missingFields = requiredFields.filter(field => !userData[field]);
 
             if (missingFields.length > 0) {
-                this._delay(null).then(() => {
-                    reject(new Error(`Missing required fields: ${missingFields.join(', ')}`));
-                });
+                await this._delay(null);
+                reject(new Error(`Missing required fields: ${missingFields.join(', ')}`));
                 return;
             }
 
@@ -71,9 +72,8 @@ export default class UserService {
             );
 
             if (userExists) {
-                this._delay(null).then(() => {
-                    reject(new Error('Username or email already exists'));
-                });
+                await this._delay(null);
+                reject(new Error('Username or email already exists'));
                 return;
             }
 
@@ -84,18 +84,18 @@ export default class UserService {
 
             this.users.push(newUser);
             const { password, ...sanitizedUser } = newUser;
-            this._delay(sanitizedUser).then(resolve);
+            const data = await this._delay(sanitizedUser);
+            resolve(data);
         });
     }
 
     updateUser(id, userData) {
-        return this.$q((resolve, reject) => {
+        return this.$q(async (resolve, reject) => {
             const index = this.users.findIndex(u => u.id === id);
 
             if (index === -1) {
-                this._delay(null).then(() => {
-                    reject(new Error('User not found'));
-                });
+                await this._delay(null);
+                reject(new Error('User not found'));
                 return;
             }
 
@@ -104,18 +104,16 @@ export default class UserService {
             );
 
             if (userExists) {
-                this._delay(null).then(() => {
-                    reject(new Error('Username or email already exists'));
-                });
+                await this._delay(null);
+                reject(new Error('Username or email already exists'));
                 return;
             }
 
             const isPasswordCorrent = this.users.some(u => u.id === userData.id && u.password === userData.password)
 
             if (!isPasswordCorrent) {
-                this._delay(null).then(() => {
-                    reject(new Error('Invalid user password'));
-                });
+                await this._delay(null);
+                reject(new Error('Invalid user password'));
                 return;
             }
 
@@ -126,23 +124,24 @@ export default class UserService {
             };
 
             const { password, ...sanitizedUser } = this.users[index];
-            this._delay(sanitizedUser).then(resolve);
+            const data = await this._delay(sanitizedUser);
+            resolve(data);
         });
     }
 
     deleteUser(id) {
-        return this.$q((resolve, reject) => {
+        return this.$q(async (resolve, reject) => {
             const index = this.users.findIndex(u => u.id === id);
 
             if (index === -1) {
-                this._delay(null).then(() => {
-                    reject(new Error('User not found'));
-                });
+                await this._delay(null);
+                reject(new Error('User not found'));
                 return;
             }
 
             this.users.splice(index, 1);
-            this._delay(true).then(resolve);
+            const data = await this._delay(true);
+            resolve(data);
         });
     }
 }
