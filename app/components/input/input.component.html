@@ -6,6 +6,8 @@
     <div class="input__wrapper">
         <input
             ng-class="{'input__field--prefix': $ctrl.prefix}"
+            app-error 
+            error-message="{{ $ctrl.error }}" 
             class="input__field"
             id="{{$ctrl.name}}"
             name="{{$ctrl.name}}"
