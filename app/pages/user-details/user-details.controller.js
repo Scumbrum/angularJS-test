@@ -10,6 +10,12 @@ class UserDetailsController {
 
         this.typeOptions = ['Admin', 'Driver'];
         this.isEditMode = false;
+
+        this.errors = {};
+        this.validationPatterns = {
+            email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+            password: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
+        };
     }
 
     $onInit() {
@@ -35,11 +41,7 @@ class UserDetailsController {
             type: ''
         };
 
-        this.errors = {};
-        this.validationPatterns = {
-            email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-            password: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
-        };
+    
     }
 
     validateForm() {
@@ -126,15 +128,13 @@ class UserDetailsController {
 
     deleteUser() {
         this.userService.deleteUser(this.editedUser.id)
-        .then(() => {
-            this.toasterService.success(
-                'User deleted successfully'
-            );
-            this.goToList();
-        })
-        .catch(error => {
-            this.handleServerErrors(error);
-        });
+            .then(() => {
+                this.toasterService.success('User deleted successfully');
+                this.goToList();
+            })
+            .catch(error => {
+                this.handleServerErrors(error);
+            });
     }
 
     goToList() {

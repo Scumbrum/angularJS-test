@@ -24,10 +24,10 @@ export default class UserListController {
 
     transcludePresent() {
         return this.$transclude.isSlotFilled('slot');
-    };
+    }
 
     selectItem(row) {
-        this.$location.path(row.id)
+        this.$location.path(row.id);
     }
 
     loadUsers() {

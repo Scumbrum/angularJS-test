@@ -11,7 +11,7 @@ export function appConfig($routeProvider) {
         .when('/:id', {
             template: `<user-list-component>
                 <transclude-slot>
-                <user-details-component></user-details-component>
+                    <user-details-component></user-details-component>
                 </transclude-slot>
             </user-list-component>`,
             resolve: {
