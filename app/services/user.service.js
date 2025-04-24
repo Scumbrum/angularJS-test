@@ -74,7 +74,6 @@ export default class UserService {
             }
 
             // Check if username or email already exists
-            console.log(this.users, userData)
             const userExists = this.users.some(u => 
                 u.username === userData.username || u.email === userData.email
             );

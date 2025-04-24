@@ -1,14 +1,12 @@
 import UserListController from "../user-list/user-list.controller";
 
 export default class UserDetailsController extends UserListController {
-    constructor(userService, toasterService, $route, $location, $scope) {
+    constructor(userService, toasterService, $route, $location) {
         'ngInject';
         super(userService, toasterService, $location);
         this.userService = userService;
         this.toasterService = toasterService;
         this.$route = $route;
-        this.$scope = $scope;
-        console.log(userService, toasterService, $location, $route)
 
         this.typeOptions = ['Admin', 'Driver'];
         this.isEditMode = false;
@@ -154,4 +152,4 @@ export default class UserDetailsController extends UserListController {
     }
 } 
 
-UserDetailsController.$inject = ['userService', 'toasterService', '$route', '$location','$scope']
+UserDetailsController.$inject = ['userService', 'toasterService', '$route', '$location']

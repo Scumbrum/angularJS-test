@@ -15,7 +15,7 @@ export default class TableController {
         }
     }
 
-    click() {
-        console.log('here')
+    selectItem(row) {
+        this.onItemClicked({ row });
     }
 }

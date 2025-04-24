@@ -24,7 +24,6 @@ export default class UserListController {
     }
 
     selectItem(row) {
-        console.log(row)
         this.$location.path(row.id)
     }
 
@@ -38,7 +37,6 @@ export default class UserListController {
             })
             .catch(error => {
                 this.toasterService.error(this.error);
-                console.error('Error loading users:', error);
             })
             .finally(() => {
                 this.isLoading = false;
