@@ -6,6 +6,8 @@ export default {
         selected: '=',
         label: '@',
         name: '@',
+        error: '<',
+        change: '&',
         required: '<',
     },
     templateUrl: '/components/dropdown/dropdown.component.html',

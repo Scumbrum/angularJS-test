@@ -1,24 +1,41 @@
 import UserListController from "../user-list/user-list.controller";
-import angular from 'angular';
-
 
 export default class UserDetailsController extends UserListController {
-    constructor(userService, toasterService, $scope) {
+    constructor(userService, toasterService, $route, $location, $scope) {
         'ngInject';
-        super();
+        super(userService, toasterService, $location);
         this.userService = userService;
         this.toasterService = toasterService;
+        this.$route = $route;
         this.$scope = $scope;
+        console.log(userService, toasterService, $location, $route)
 
         this.typeOptions = ['Admin', 'Driver'];
-        
-        this.editedUser = {
+        this.isEditMode = false;
+    }
+
+    $onInit() {
+        this.initializeForm();
+    }
+
+    initializeForm() {
+        // Get resolved data
+        const resolvedUser = this.$route.current.locals.resolvedUser;
+
+        this.isEditMode = !!resolvedUser;
+
+        this.editedUser = resolvedUser ? {
+            ...resolvedUser,
+            password: '',
+            repeatPassword: ''
+        } : {
             username: '',
-            first_name: '',
-            last_name: '',
+            firstName: '',
+            lastName: '',
             email: '',
             password: '',
-            user_type: ''
+            repeatPassword: '',
+            type: ''
         };
 
         this.errors = {};
@@ -30,54 +47,52 @@ export default class UserDetailsController extends UserListController {
 
     validateForm() {
         this.errors = {};
-        let isValid = true;
 
         // Username validation
         if (!this.editedUser.username) {
             this.errors.username = 'Username is required';
-            isValid = false;
         }
 
         // First name validation
-        if (!this.editedUser.first_name) {
+        if (!this.editedUser.firstName) {
             this.errors.first_name = 'First name is required';
-            isValid = false;
         }
 
         // Last name validation
-        if (!this.editedUser.last_name) {
+        if (!this.editedUser.lastName) {
             this.errors.last_name = 'Last name is required';
-            isValid = false;
         }
 
         // Email validation
         if (!this.editedUser.email) {
             this.errors.email = 'Email is required';
-            isValid = false;
         } else if (!this.validationPatterns.email.test(this.editedUser.email)) {
             this.errors.email = 'Please enter a valid email address';
-            isValid = false;
         }
 
-        // Password validation
-        if (!this.editedUser.password) {
-            this.errors.password = 'Password is required';
-            isValid = false;
-        } else if (!this.validationPatterns.password.test(this.editedUser.password)) {
-            this.errors.password = 'Password must be at least 8 characters long and contain at least one letter and one number';
-            isValid = false;
+        // Password validation (only required for new users or if provided during edit)
+        if (!this.isEditMode || this.editedUser.password) {
+            if (!this.editedUser.password) {
+                this.errors.password = 'Password is required';
+            } else if (!this.validationPatterns.password.test(this.editedUser.password)) {
+                this.errors.password = 'Password must be at least 8 characters long and contain at least one letter and one number';
+            }
+
+            if (!this.editedUser.repeatPassword) {
+                this.errors.repeatPassword = 'Repeat password is required';
+            } else if (this.editedUser.password !== this.editedUser.repeatPassword) {
+                this.errors.repeatPassword = 'Password not matched';
+            }
         }
 
         // User type validation
-        if (!this.editedUser.user_type) {
-            this.errors.user_type = 'User type is required';
-            isValid = false;
-        } else if (!this.typeOptions.includes(this.editedUser.user_type)) {
-            this.errors.user_type = 'Invalid user type';
-            isValid = false;
+        if (!this.editedUser.type) {
+            this.errors.type = 'User type is required';
+        } else if (!this.typeOptions.includes(this.editedUser.type)) {
+            this.errors.type = 'Invalid user type';
         }
 
-        return isValid;
+        return Object.keys(this.errors).length === 0;
     }
 
     handleServerErrors(error) {
@@ -85,10 +100,17 @@ export default class UserDetailsController extends UserListController {
             this.errors.username = 'This username is already taken';
         } else if (error.message.includes('Email already exists')) {
             this.errors.email = 'This email is already registered';
+        } else if (error.message.includes('User not found')) {
+            this.$location.path('/error/404');
+        } else if (error.message.includes('Invalid user password')) {
+            this.$location.path('/error/403');
         } else {
             this.toasterService.error(error.message);
         }
-        this.$scope.$apply();
+    }
+
+    listenInput(field) {
+        this.errors[field] = '';
     }
 
     saveChanges() {
@@ -97,9 +119,15 @@ export default class UserDetailsController extends UserListController {
             return;
         }
 
-        this.userService.createUser(this.editedUser)
+        const savePromise = this.isEditMode ? 
+            this.userService.updateUser(this.editedUser.id, this.editedUser) :
+            this.userService.createUser(this.editedUser);
+
+        savePromise
             .then(() => {
-                this.toasterService.success('User created successfully');
+                this.toasterService.success(
+                    this.isEditMode ? 'User updated successfully' : 'User created successfully'
+                );
                 this.goToList();
             })
             .catch(error => {
@@ -107,7 +135,23 @@ export default class UserDetailsController extends UserListController {
             });
     }
 
+    deleteUser() {
+        this.userService.deleteUser(this.editedUser.id)
+        .then(() => {
+            this.toasterService.success(
+                'User deleted successfully'
+            );
+            this.goToList();
+        })
+        .catch(error => {
+            this.handleServerErrors(error);
+        });
+    
+    }
+
     goToList() {
-        // Navigation logic here
+        this.$location.path('/');
     }
 } 
+
+UserDetailsController.$inject = ['userService', 'toasterService', '$route', '$location','$scope']

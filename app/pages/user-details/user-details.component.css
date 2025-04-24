@@ -11,6 +11,7 @@
 
 .modal-header {
     padding-top: 20px;
+    margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
     position: sticky;
@@ -52,13 +53,17 @@
 .user-form {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 13px;
 }
 
 .form-actions {
     margin-top: 20px;
     display: flex;
     justify-content: center;
+}
+
+.form-actions.edit {
+    justify-content: space-between;
 }
 
 /* Override any default form styles */

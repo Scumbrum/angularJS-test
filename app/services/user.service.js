@@ -74,6 +74,7 @@ export default class UserService {
             }
 
             // Check if username or email already exists
+            console.log(this.users, userData)
             const userExists = this.users.some(u => 
                 u.username === userData.username || u.email === userData.email
             );
@@ -117,6 +118,15 @@ export default class UserService {
             if (userExists) {
                 this._delay(null).then(() => {
                     reject(new Error('Username or email already exists'));
+                });
+                return;
+            }
+
+            const isPasswordCorrent = this.users.some(u => u.id === userData.id && u.password === userData.password)
+
+            if (isPasswordCorrent) {
+                this._delay(null).then(() => {
+                    reject(new Error('Invalid user password'));
                 });
                 return;
             }

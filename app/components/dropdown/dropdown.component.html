@@ -5,7 +5,7 @@
     class="dropdown-header" 
     ng-click="$ctrl.toggleDropdown($event)"
     app-error 
-            error-message="This field is required" 
+            error-message="{{ $ctrl.error }}" 
     >
       <span class="selected-option">{{$ctrl.selected || 'Select...'}}</span>
       <span class="dropdown-arrow"></span>

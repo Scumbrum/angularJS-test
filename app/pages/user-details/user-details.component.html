@@ -1,23 +1,33 @@
 <div class="user-list-page">
     <div class="users__table">
-        <custom-button>Create User</custom-button>
+        <custom-button on-button-click="$ctrl.createUser()">Create User</custom-button>
         <table-component 
-            data="$ctrl.users" 
-            columns="$ctrl.columns">
-        </table-component>
+        ng-if="!$ctrl.isLoading  && $ctrl.users.length"
+        item-clicked="$ctrl.selectItem(row)"
+        data="$ctrl.users" 
+        columns="$ctrl.columns">
+    </table-component>
+    <div class="loading-state" ng-if="$ctrl.isLoading">
+        Loading users...
+    </div>
+    <div class="empty-state" ng-if="!$ctrl.isLoading && !$ctrl.users.length">
+        No users found. Click "Create User" to add one.
+    </div>
     </div>
 
     <div class="users__details">
         <div class="modal-header">
-            <h2>Create new user</h2>
+            <h2 ng-show="!$ctrl.isEditMode">Create new user</h2>
+            <h2 ng-show="$ctrl.isEditMode">{{ $ctrl.editedUser.firstName }} {{ $ctrl.editedUser.lastName }}</h2>
             <button class="close-button" ng-click="$ctrl.goToList()">×</button>
         </div>
 
-        <form class="user-form" name="userForm" ng-submit="$ctrl.saveChanges()" novalidate>
+        <form class="user-form" name="userForm">
             <custom-input
                 type="text"
                 name="username"
                 label="Username"
+                change="$ctrl.listenInput('username')"
                 model="$ctrl.editedUser.username"
                 required="true"
                 error="$ctrl.errors.username">
@@ -27,7 +37,8 @@
                 type="text"
                 name="first_name"
                 label="First name"
-                model="$ctrl.editedUser.first_name"
+                change="$ctrl.listenInput('first_name')"
+                model="$ctrl.editedUser.firstName"
                 required="true"
                 error="$ctrl.errors.first_name">
             </custom-input>
@@ -35,47 +46,77 @@
             <custom-input
                 type="text"
                 name="last_name"
+                change="$ctrl.listenInput('last_name')"
                 label="Last name"
-                model="$ctrl.editedUser.last_name"
+                model="$ctrl.editedUser.lastName"
                 required="true"
                 error="$ctrl.errors.last_name">
             </custom-input>
     
             <custom-input
-                type="email"
+                type="text"
                 name="email"
+                change="$ctrl.listenInput('email')"
                 label="Email"
                 model="$ctrl.editedUser.email"
                 required="true"
                 error="$ctrl.errors.email">
             </custom-input>
     
-            <custom-input
-                type="password"
-                name="password"
-                label="Password"
-                model="$ctrl.editedUser.password"
-                required="true"
-                error="$ctrl.errors.password"
-                placeholder="Minimum 8 characters, at least one letter and one number">
-            </custom-input>
-    
             <custom-dropdown
                 name="user_type"
                 label="User Type"
-                model="$ctrl.editedUser.user_type"
+                selected="$ctrl.editedUser.type"
+                change="$ctrl.listenInput('type')"
                 required="true"
                 options="$ctrl.typeOptions"
-                error="$ctrl.errors.user_type">
+                error="$ctrl.errors.type">
             </custom-dropdown>
+
+            <custom-input
+            type="password"
+            name="password"
+            change="$ctrl.listenInput('password')"
+            label="Password"
+            model="$ctrl.editedUser.password"
+            required="true"
+            error="$ctrl.errors.password"
+            placeholder="Minimum 8 characters, at least one letter and one number">
+        </custom-input>
+
+        <custom-input
+                type="password"
+                name="repeatPassword"
+                change="$ctrl.listenInput('repeatPassword')"
+                label="Repeat password"
+                model="$ctrl.editedUser.repeatPassword"
+                required="true"
+                error="$ctrl.errors.repeatPassword">
+            </custom-input>
     
-            <div class="form-actions">
+            <div class="form-actions" ng-class="{edit: $ctrl.isEditMode}">
                 <custom-button 
+                    ng-show="!$ctrl.isEditMode"
                     size="large"
                     type="primary" 
                     on-button-click="$ctrl.saveChanges()">
-                    Create User
+                    Create
                 </custom-button>
+                <custom-button 
+                ng-show="$ctrl.isEditMode"
+                size="large"
+                type="secondary" 
+                on-button-click="$ctrl.deleteUser()">
+                Delete
+            </custom-button>
+                <custom-button 
+                    ng-show="$ctrl.isEditMode"
+                    size="large"
+                    type="primary" 
+                    on-button-click="$ctrl.saveChanges()">
+                    Save
+                </custom-button>
+              
             </div>
         </form>
     </div>

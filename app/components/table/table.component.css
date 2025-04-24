@@ -39,10 +39,7 @@
 .table-component tr {
     background-color: #F4F5F8;
     font-size: 0.8em;
-}
-
-.table-component th:hover {
-    background-color: #f0f0f0;
+    cursor: pointer;
 }
 
 .table-component tr:hover {

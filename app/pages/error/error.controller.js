@@ -1,6 +1,7 @@
 export default class ErrorController {
-  constructor($routeParams) {
+  constructor($routeParams, $location) {
     this.$routeParams = $routeParams;
+    this.$location= $location;
     this.errorMessages = {
       '400': 'Bad Request - The server cannot process the request due to client error',
       '401': 'Unauthorized - Authentication is required to access this resource',
@@ -19,8 +20,6 @@ export default class ErrorController {
   }
 
   goBack() {
-    window.history.back();
+    this.$location.path('/');
   }
 }
-
-ErrorController.$inject = ['$routeParams']; 

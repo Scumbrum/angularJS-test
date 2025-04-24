@@ -54,9 +54,9 @@ function templates() {
     .pipe(gulp.dest('./app'));
 }
 
-// Process JavaScript files with Webpack
+
 function scripts() {
-    // Expand glob patterns to get actual file paths
+
     const jsFiles = paths.src.js.reduce((files, pattern) => {
         return files.concat(glob.sync(pattern));
     }, []);
@@ -87,7 +87,11 @@ function styles() {
         .pipe(browserSync.stream());
 }
 
-// Watch files
+function copyIndex() {
+    return gulp.src('./index.html')
+        .pipe(gulp.dest(paths.dist.base));
+}
+
 function watch() {
     browserSync.init({
         server: {
@@ -100,13 +104,11 @@ function watch() {
     gulp.watch(paths.src.html, templates);
 }
 
-// Build task
-const build = gulp.series(clean, templates, gulp.parallel(scripts, styles));
+const build = gulp.series(clean, templates, gulp.parallel(scripts, styles, copyIndex));
 
-// Serve task
+
 const serve = gulp.series(build, watch);
 
-// Export tasks
 exports.clean = clean;
 exports.build = build;
 exports.serve = serve;

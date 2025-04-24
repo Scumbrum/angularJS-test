@@ -1,15 +1,14 @@
 // User List Controller
 export default class UserListController {
-    constructor() {
-        // Initialize controller properties
-        this.users = [
-            { id: 1, username: 'mperry1992', firstName: 'Matthew', lastName: 'Perry', email: 'matthew@mail.com', type: 'Administrator' },
-            { id: 2, username: 'jsmith', firstName: 'John', lastName: 'Smith', email: 'john@mail.com', type: 'User' },
-            { id: 3, username: 'awhite', firstName: 'Alice', lastName: 'White', email: 'alice@mail.com', type: 'Editor' }
-        ];
+    constructor(userService, toasterService, $location) {
+        'ngInject';
+        this.userService = userService;
+        this.toasterService = toasterService;
+        this.$location = $location;
 
-        // Initialize new user form
-        this.newUser = this.getEmptyUserForm();
+        // Initialize controller properties
+        this.users = [];
+        this.isLoading = false;
 
         // Table configuration
         this.columns = [
@@ -19,51 +18,34 @@ export default class UserListController {
             { key: 'email', header: 'EMAIL' },
             { key: 'type', header: 'TYPE' }
         ];
+
+        // Load users when controller initializes
+        this.loadUsers();
     }
 
-    getEmptyUserForm() {
-        return {
-            username: '',
-            firstName: '',
-            lastName: '',
-            email: '',
-            type: 'User'
-        };
+    selectItem(row) {
+        console.log(row)
+        this.$location.path(row.id)
     }
 
-    addUser() {
-        const newUser = {
-            id: this.users.length + 1,
-            username: this.newUser.username,
-            firstName: this.newUser.firstName,
-            lastName: this.newUser.lastName,
-            email: this.newUser.email,
-            type: this.newUser.type
-        };
+    loadUsers() {
+        this.isLoading = true;
+        this.error = null;
 
-        this.users.push(newUser);
-        this.newUser = this.getEmptyUserForm();
+        this.userService.getUsers()
+            .then(users => {
+                this.users = users;
+            })
+            .catch(error => {
+                this.toasterService.error(this.error);
+                console.error('Error loading users:', error);
+            })
+            .finally(() => {
+                this.isLoading = false;
+            });
     }
 
-    deleteUser(userId) {
-        this.users = this.users.filter(user => user.id !== userId);
-    }
-
-    editUser(user) {
-        this.editingUser = { ...user };
-        this.isEditing = true;
-    }
-
-    updateUser() {
-        const index = this.users.findIndex(user => user.id === this.editingUser.id);
-        if (index !== -1) {
-            this.users[index] = { ...this.editingUser };
-        }
-        this.cancelEdit();
-    }
-
-    cancelEdit() {
-        this.editingUser = null;
-        this.isEditing = false;
+    createUser() {
+        this.$location.path('/create');
     }
 } 

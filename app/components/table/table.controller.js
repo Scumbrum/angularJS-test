@@ -14,4 +14,8 @@ export default class TableController {
             this.columns = this.defaultColumns;
         }
     }
+
+    click() {
+        console.log('here')
+    }
 }

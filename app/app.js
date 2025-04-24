@@ -12,9 +12,10 @@ import userListModule from './pages/user-list/user-list.module';
 import userDetailsModule from './pages/user-details/user-details.module';
 import ErrorModule from './pages/error/error.module';
 import ServiceModule from './services/services.module'
+import { userDetailsResolver } from './pages/user-details/user-details.resolver';
 
 // Define the Angular module
-const app = angular.module('myApp', ['ngRoute', 'templates', componentsModule, userListModule, userDetailsModule, ErrorModule, ServiceModule])
+angular.module('myApp', ['ngRoute', 'templates', componentsModule, userListModule, userDetailsModule, ErrorModule, ServiceModule])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider
             .when('/test', {
@@ -27,9 +28,11 @@ const app = angular.module('myApp', ['ngRoute', 'templates', componentsModule, u
                 template: '<error-page></error-page>'
             })
             .when('/:id', {
-                template: '<user-details-component></user-details-component>'
+                template: '<user-details-component></user-details-component>',
+                resolve: {
+                    resolvedUser: userDetailsResolver
+                }
             })
-
             .otherwise({
                 redirectTo: '/'
             });

@@ -10,6 +10,7 @@ export default class DropdownController {
 
   selectOption(option) {
     this.selected = option;
+    this.change();
     this.isOpen = false;
   }
 

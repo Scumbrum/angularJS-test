@@ -1,6 +1,5 @@
 export default class InputController {
     constructor() {
-        this.showPassword = false;
     }
 
     $onInit() {
@@ -14,12 +13,6 @@ export default class InputController {
         this.isRequired = this.required || false;
     }
 
-    togglePasswordVisibility() {
-        if (this.type === 'password') {
-            this.showPassword = !this.showPassword;
-        }
-    }
-
     getInputType() {
         if (this.type === 'password' && this.showPassword) {
             return 'text';
@@ -27,7 +20,7 @@ export default class InputController {
         return this.type;
     }
 
-    hasError() {
-        return this.error && this.error.length > 0;
+    onInput() {
+        console.log('here')
     }
 } 

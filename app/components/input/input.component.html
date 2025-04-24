@@ -7,10 +7,11 @@
     <div class="input-field-wrapper">
         <input
             app-error 
-            error-message="This field is required"  
+            error-message="{{$ctrl.error}}"  
             id="{{$ctrl.inputId}}"
             name="{{$ctrl.name}}"
             type="{{$ctrl.getInputType()}}"
+            ng-change="$ctrl.change()"
             ng-model="$ctrl.model"
             ng-required="$ctrl.isRequired"
             placeholder="{{$ctrl.placeholder}}"
