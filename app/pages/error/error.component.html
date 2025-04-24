@@ -1,7 +1,7 @@
 <div class="error-page">
-  <div class="error-content">
-    <h1 class="error-status">{{$ctrl.status}}</h1>
-    <div class="error-page-message">{{$ctrl.errorMessage}}</div>
-    <button class="error-back-button" ng-click="$ctrl.goBack()">Go Back</button>
+  <div class="error-page__content">
+    <h1 class="error-page__status">{{$ctrl.status}}</h1>
+    <div class="error-page__message">{{$ctrl.errorMessage}}</div>
+    <custom-button class="error-page__button" on-button-click="$ctrl.goBack()">Go Back</custom-button>
   </div>
 </div> 

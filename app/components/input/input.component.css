@@ -1,4 +1,8 @@
-.input-label {
+.input {
+    position: relative;
+}
+
+.input__label {
     display: block;
     margin-bottom: 8px;
     color: var(--color-text-primary);
@@ -6,16 +10,12 @@
     font-weight: 500;
 }
 
-.required-marker {
+.input__required {
     color: var(--color-error);
     margin-left: 2px;
 }
 
-.input-field-wrapper {
-    position: relative;
-}
-
-.input-field {
+.input__field {
     width: 100%;
     padding: 10px 12px;
     font-size: 14px;
@@ -27,13 +27,13 @@
     transition: all 0.2s ease;
 }
 
-.input-field:focus {
+.input__field:focus {
     outline: none;
     border-color: var(--color-button-primary);
     background-color: var(--color-blue-200);
     box-shadow: 0 0 0 3px var(--color-shadow-blue);
 }
 
-.input-field::placeholder {
+.input__field::placeholder {
     color: var(--color-text-muted);
 }

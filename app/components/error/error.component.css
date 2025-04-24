@@ -1,11 +1,11 @@
-.error-border {
-  border: 2px solid var(--color-error) !important;
-  border-radius: 4px;
+.error {
+    color: var(--color-error);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    font-weight: 500;
 }
 
-.error-message {
-  color: var(--color-error);
-  font-size: 0.875rem;
-  margin-top: 0.25rem;
-  font-weight: 500;
+.error--border {
+    border: 2px solid var(--color-error) !important;
+    border-radius: 4px;
 }

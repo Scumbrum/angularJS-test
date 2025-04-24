@@ -1,4 +1,9 @@
-.modal-header {
+.user-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-details__header {
     padding-top: 20px;
     margin-bottom: 10px;
     display: flex;
@@ -9,14 +14,14 @@
     background: var(--color-bg-primary);
 }
 
-.modal-header h2 {
+.user-details__title {
     margin: 0;
     font-size: 18px;
     color: var(--color-text-primary);
     font-weight: 600;
 }
 
-.close-button {
+.user-details__close {
     background: none;
     border: none;
     font-size: 24px;
@@ -31,36 +36,36 @@
     transition: color 0.2s;
 }
 
-.close-button:hover {
+.user-details__close:hover {
     color: var(--color-text-secondary);
 }
 
-.modal-body {
+.user-details__body {
     padding: 20px;
 }
 
-.user-form {
+.user-details__form {
     display: flex;
     flex-direction: column;
     gap: 13px;
 }
 
-.form-actions {
+.user-details__actions {
     margin-top: 20px;
     display: flex;
     justify-content: center;
 }
 
-.form-actions.edit {
+.user-details__actions--edit {
     justify-content: space-between;
 }
 
 /* Override any default form styles */
-.user-form custom-input {
+.user-details__form custom-input {
     width: 100%;
 }
 
-.user-form custom-button {
+.user-details__form custom-button {
     width: 40%;
 }
 

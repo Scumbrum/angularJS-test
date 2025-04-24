@@ -1,17 +1,17 @@
-<div class="custom-dropdown">
-  <label ng-if="$ctrl.label" class="dropdown-label">{{$ctrl.label}}</label>
-  <div class="dropdown-container" ng-class="{'is-open': $ctrl.isOpen}">
+<div class="dropdown">
+  <label ng-if="$ctrl.label" class="dropdown__label">{{$ctrl.label}}</label>
+  <div class="dropdown__container" ng-class="{'dropdown__container--open': $ctrl.isOpen}">
     <div 
-    class="dropdown-header" 
-    ng-click="$ctrl.toggleDropdown($event)"
-    app-error 
-            error-message="{{ $ctrl.error }}" 
+      class="dropdown__header" 
+      ng-click="$ctrl.toggleDropdown($event)"
+      app-error 
+      error-message="{{ $ctrl.error }}" 
     >
-      <span class="selected-option">{{$ctrl.selected || 'Select...'}}</span>
-      <span class="dropdown-arrow"></span>
+      <span class="dropdown__selected">{{$ctrl.selected || 'Select...'}}</span>
+      <span class="dropdown__arrow"></span>
     </div>
-    <div class="dropdown-options" ng-show="$ctrl.isOpen">
-      <div class="dropdown-option" 
+    <div class="dropdown__options" ng-show="$ctrl.isOpen">
+      <div class="dropdown__option" 
            ng-repeat="option in $ctrl.options"
            ng-click="$ctrl.selectOption(option)">
         {{option}}

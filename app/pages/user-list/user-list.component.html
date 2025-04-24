@@ -1,15 +1,13 @@
-<div class="user-list-page">
-    <div class="users__table">
-        
-            <custom-button 
-                type="primary"
-                on-button-click="$ctrl.createUser()">
-                Create User
-            </custom-button>
-       
+<div class="user-list__page">
+    <div class="user-list__table">
+        <custom-button 
+            type="primary"
+            on-button-click="$ctrl.createUser()">
+            Create User
+        </custom-button>
 
         <!-- Loading state -->
-        <div class="loading-state" ng-if="$ctrl.isLoading">
+        <div class="user-list__loading" ng-if="$ctrl.isLoading">
             Loading users...
         </div>
 
@@ -22,16 +20,14 @@
         </table-component>
 
         <!-- Empty state -->
-        <div class="empty-state" ng-if="!$ctrl.isLoading && !$ctrl.users.length">
+        <div class="user-list__empty" ng-if="!$ctrl.isLoading && !$ctrl.users.length">
             No users found. Click "Create User" to add one.
         </div>
     </div>
 
     <div 
-    class="users__details" 
-    ng-show="$ctrl.transcludePresent()" 
-    ng-transclude="slot">
-
+        class="user-list__details" 
+        ng-show="$ctrl.transcludePresent()" 
+        ng-transclude="slot">
     </div>
-    
 </div> 

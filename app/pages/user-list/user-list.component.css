@@ -10,7 +10,7 @@ table-component {
     flex: 1;
 }
 
-.users__table {
+.user-list__table {
     flex: 5;
     display: flex;
     flex-direction: column;
@@ -18,7 +18,7 @@ table-component {
     align-items: flex-end;
 }
 
-.user-list-page {
+.user-list__page {
     padding: 100px 20px;
     max-width: 1600px;
     display: flex;
@@ -27,12 +27,12 @@ table-component {
     margin: 0 auto;
 }
 
-.user-list-page h2 {
+.user-list__title {
     color: var(--color-text-primary);
     text-align: center;
 }
 
-.users__details {
+.user-list__details {
     flex: 2;
     padding: 0 20px 20px;
     border-radius: 5px;
@@ -42,40 +42,41 @@ table-component {
     overflow: auto;
 }
 
-.user-table {
+.user-list__table-wrapper {
     background-color: var(--color-bg-secondary);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px var(--color-shadow-light);
 }
 
-.user-table h3 {
+.user-list__table-title {
     color: var(--color-text-primary);
     margin-bottom: 15px;
 }
 
-table {
+.user-list__table-element {
     width: 100%;
     border-collapse: collapse;
 }
 
-th, td {
+.user-list__table-header,
+.user-list__table-cell {
     padding: 12px 15px;
     text-align: left;
     border-bottom: 1px solid var(--color-border-light);
 }
 
-th {
+.user-list__table-header {
     background-color: var(--color-gray-300);
     font-weight: bold;
     color: var(--color-text-primary);
 }
 
-tr:hover {
+.user-list__table-row:hover {
     background-color: var(--color-gray-200);
 } 
 
-.empty-state {
+.user-list__empty {
     width: 100%;
     text-align: center;
     height: calc(100% - 48px);

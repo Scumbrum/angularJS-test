@@ -1,4 +1,4 @@
-.custom-button {
+.button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -12,62 +12,62 @@
     width: 100%;
 }
 
-.custom-button.large {
+.button--large {
     padding: 16px 20px;
 }
 
 /* Primary Button - matches the blue button in screenshot */
-.custom-button.btn-primary {
+.button--primary {
     background-color: var(--color-button-primary);
     color: var(--color-white);
     box-shadow: 3px 2px 18px 0px var(--color-blue-300);
 }
 
-.custom-button.btn-primary:hover {
+.button--primary:hover {
     background-color: var(--color-button-primary-hover);
 }
 
 /* Secondary Button */
-.custom-button.btn-secondary {
+.button--secondary {
     background-color: var(--color-button-danger);
     color: var(--color-white);
     border: 1px solid var(--color-border-light);
     box-shadow: 3px 2px 18px 0px var(--color-red-100);
 }
 
-.custom-button.btn-secondary:hover {
+.button--secondary:hover {
     background-color: var(--color-button-danger-hover);
 }
 
 /* Button Sizes */
-.custom-button.size-small {
+.button--small {
     padding: 6px 12px;
     font-size: 12px;
 }
 
-.custom-button.size-medium {
+.button--medium {
     padding: 8px 16px;
     font-size: 14px;
 }
 
-.custom-button.size-large {
+.button--large {
     padding: 12px 24px;
     font-size: 16px;
 }
 
 /* Disabled State */
-.custom-button:disabled {
+.button:disabled {
     opacity: 0.6;
     cursor: not-allowed;
 }
 
 /* Focus State */
-.custom-button:focus {
+.button:focus {
     outline: none;
     box-shadow: 0 0 0 3px var(--color-shadow-blue-focus);
 }
 
 /* Active State */
-.custom-button:active {
+.button:active {
     transform: translateY(1px);
 } 

@@ -1,4 +1,4 @@
-.table-component {
+.table {
     width: 100%;
     height: 100%;
     background-color: var(--color-bg-primary);
@@ -7,25 +7,25 @@
     overflow-x: auto;
 }
 
-.table-component table {
+.table__container {
     width: 100%;
     border-collapse: collapse;
 }
 
-.table-component thead {
+.table__header {
     position: sticky;
     top: 0;
 }
 
-.table-component th,
-.table-component td {
+.table__header-cell,
+.table__cell {
     padding: 12px 15px;
     line-height: 150%;
     text-align: left;
     border-bottom: 1px solid var(--color-bg-primary);
 }
 
-.table-component th {
+.table__header-cell {
     font-weight: 500;
     color: var(--color-text-secondary);
     background-color: var(--color-bg-primary);
@@ -35,16 +35,16 @@
     transition: background-color 0.2s;
 }
 
-.table-component tr {
+.table__row {
     background-color: var(--color-blue-200);
     font-size: 0.8em;
     cursor: pointer;
 }
 
-.table-component tr:hover {
+.table__row:hover {
     background-color: var(--color-blue-100);
 }
 
-.table-component td {
+.table__cell {
     color: var(--color-text-primary);
 }

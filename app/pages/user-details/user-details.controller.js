@@ -68,8 +68,7 @@ export default class UserDetailsController {
             this.errors.email = 'Please enter a valid email address';
         }
 
-        // Password validation (only required for new users or if provided during edit)
-        if (!this.isEditMode || this.editedUser.password) {
+       
             if (!this.editedUser.password) {
                 this.errors.password = 'Password is required';
             } else if (!this.validationPatterns.password.test(this.editedUser.password)) {
@@ -81,7 +80,7 @@ export default class UserDetailsController {
             } else if (this.editedUser.password !== this.editedUser.repeatPassword) {
                 this.errors.repeatPassword = 'Password not matched';
             }
-        }
+        
 
         // User type validation
         if (!this.editedUser.type) {

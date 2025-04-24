@@ -1,22 +1,19 @@
-<div class="input-wrapper">
-    <label ng-if="$ctrl.label" for="{{$ctrl.inputId}}" class="input-label">
+<div class="input">
+    <label ng-if="$ctrl.label" for="{{$ctrl.inputId}}" class="input__label">
         {{$ctrl.label}}
-        <span ng-if="$ctrl.isRequired" class="required-marker">*</span>
+        <span ng-if="$ctrl.isRequired" class="input__required">*</span>
     </label>
     
-    <div class="input-field-wrapper">
-        <input
-            app-error 
-            error-message="{{$ctrl.error}}"  
-            id="{{$ctrl.inputId}}"
-            name="{{$ctrl.name}}"
-            type="{{$ctrl.getInputType()}}"
-            ng-change="$ctrl.change()"
-            ng-model="$ctrl.model"
-            ng-required="$ctrl.isRequired"
-            placeholder="{{$ctrl.placeholder}}"
-            class="input-field"
-        >
-    </div>
-
+    <input
+        app-error 
+        error-message="{{$ctrl.error}}"  
+        id="{{$ctrl.inputId}}"
+        name="{{$ctrl.name}}"
+        type="{{$ctrl.getInputType()}}"
+        ng-change="$ctrl.change()"
+        ng-model="$ctrl.model"
+        ng-required="$ctrl.isRequired"
+        placeholder="{{$ctrl.placeholder}}"
+        class="input__field"
+    >
 </div> 
