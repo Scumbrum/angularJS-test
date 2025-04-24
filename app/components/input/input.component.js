@@ -2,15 +2,16 @@ import InputController from './input.controller';
 
 export default {
     bindings: {
-        type: '@',          // text, password
-        name: '@',          // input name
-        label: '@',         // label text
-        model: '=', 
+        type: '@',
+        name: '@',
+        label: '@',
+        model: '=',
         change: '&',
-        required: '<', 
-        error: '<',     // is required
-        placeholder: '@',   // placeholder text
+        required: '<',
+        error: '<',
+        placeholder: '@',
+        prefix: '@',
     },
     templateUrl: '/components/input/input.component.html',
     controller: InputController
-}; 
+};

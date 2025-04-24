@@ -1,6 +1,6 @@
 import UserListController from "../user-list/user-list.controller";
 
-export default class UserDetailsController {
+class UserDetailsController {
     constructor(userService, toasterService, $route, $location) {
         'ngInject';
         this.userService = userService;
@@ -17,7 +17,6 @@ export default class UserDetailsController {
     }
 
     initializeForm() {
-        // Get resolved data
         const resolvedUser = this.$route.current.locals.resolvedUser;
 
         this.isEditMode = !!resolvedUser;
@@ -46,43 +45,36 @@ export default class UserDetailsController {
     validateForm() {
         this.errors = {};
 
-        // Username validation
         if (!this.editedUser.username) {
             this.errors.username = 'Username is required';
         }
 
-        // First name validation
         if (!this.editedUser.firstName) {
             this.errors.first_name = 'First name is required';
         }
 
-        // Last name validation
         if (!this.editedUser.lastName) {
             this.errors.last_name = 'Last name is required';
         }
 
-        // Email validation
         if (!this.editedUser.email) {
             this.errors.email = 'Email is required';
         } else if (!this.validationPatterns.email.test(this.editedUser.email)) {
             this.errors.email = 'Please enter a valid email address';
         }
 
-       
-            if (!this.editedUser.password) {
-                this.errors.password = 'Password is required';
-            } else if (!this.validationPatterns.password.test(this.editedUser.password)) {
-                this.errors.password = 'Password must be at least 8 characters long and contain at least one letter and one number';
-            }
+        if (!this.editedUser.password) {
+            this.errors.password = 'Password is required';
+        } else if (!this.validationPatterns.password.test(this.editedUser.password)) {
+            this.errors.password = 'Password must be at least 8 characters long and contain at least one letter and one number';
+        }
 
-            if (!this.editedUser.repeatPassword) {
-                this.errors.repeatPassword = 'Repeat password is required';
-            } else if (this.editedUser.password !== this.editedUser.repeatPassword) {
-                this.errors.repeatPassword = 'Password not matched';
-            }
-        
+        if (!this.editedUser.repeatPassword) {
+            this.errors.repeatPassword = 'Repeat password is required';
+        } else if (this.editedUser.password !== this.editedUser.repeatPassword) {
+            this.errors.repeatPassword = 'Password not matched';
+        }
 
-        // User type validation
         if (!this.editedUser.type) {
             this.errors.type = 'User type is required';
         } else if (!this.typeOptions.includes(this.editedUser.type)) {
@@ -143,10 +135,11 @@ export default class UserDetailsController {
         .catch(error => {
             this.handleServerErrors(error);
         });
-    
     }
 
     goToList() {
         this.$location.path('/');
     }
-} 
+}
+
+export default UserDetailsController; 

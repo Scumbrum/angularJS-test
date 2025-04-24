@@ -2,12 +2,12 @@ import ButtonController from './button.controller';
 
 export default {
     bindings: {
-        type: '@',     
-        size: '@',      // primary, secondary
-        disabled: '<',      // boolean
-        onButtonClick: '&'  // click handler
+        type: '@',
+        size: '@',
+        disabled: '<',
+        onButtonClick: '&'
     },
-    transclude: true,      // allows content to be injected
+    transclude: true,
     templateUrl: '/components/button/button.component.html',
     controller: ButtonController
-}; 
+};

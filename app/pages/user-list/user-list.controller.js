@@ -1,4 +1,3 @@
-// User List Controller
 export default class UserListController {
     constructor(userService, toasterService, $location, $transclude) {
         'ngInject';
@@ -7,11 +6,9 @@ export default class UserListController {
         this.$location = $location;
         this.$transclude = $transclude;
 
-        // Initialize controller properties
         this.users = [];
         this.isLoading = false;
 
-        // Table configuration
         this.columns = [
             { key: 'username', header: 'USERNAME' },
             { key: 'firstName', header: 'FIRST NAME' },
@@ -19,8 +16,9 @@ export default class UserListController {
             { key: 'email', header: 'EMAIL' },
             { key: 'type', header: 'TYPE' }
         ];
+    }
 
-        // Load users when controller initializes
+    $onInit() {
         this.loadUsers();
     }
 
@@ -51,4 +49,4 @@ export default class UserListController {
     createUser() {
         this.$location.path('/create');
     }
-} 
+}

@@ -3,13 +3,10 @@ export default class InputController {
     }
 
     $onInit() {
-        // Set default type if not provided
         this.type = this.type || 'text';
 
-        // Generate unique ID for input
         this.inputId = `input-${this.name}-${Math.random().toString(36).substr(2, 9)}`;
 
-        // Set required state
         this.isRequired = this.required || false;
     }
 

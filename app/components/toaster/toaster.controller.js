@@ -4,7 +4,7 @@ export default class ToasterController {
     this.isVisible = false;
     this.message = '';
     this.type = 'success';
-    this.duration = 3000; // Default duration in milliseconds
+    this.duration = 3000;
   }
 
   $onInit() {
@@ -16,7 +16,6 @@ export default class ToasterController {
     this.type = type;
     this.isVisible = true;
 
-    // Auto-hide the toaster after duration
     this.$timeout(() => {
       this.close();
     }, duration);
@@ -26,5 +25,3 @@ export default class ToasterController {
     this.isVisible = false;
   }
 }
-
-ToasterController.$inject = ['$timeout']; 

@@ -4,10 +4,9 @@ export default class UserService {
         this.$q = $q;
         this.$timeout = $timeout;
 
-        // Simulated database
         this.users = [
-            { 
-                id: 1, 
+            {
+                id: 1,
                 username: 'john.doe',
                 firstName: 'John',
                 lastName: 'Doe',
@@ -15,8 +14,8 @@ export default class UserService {
                 type: 'Admin',
                 password: 'hashedPassword123'
             },
-            { 
-                id: 2, 
+            {
+                id: 2,
                 username: 'jane.smith',
                 firstName: 'Jane',
                 lastName: 'Smith',
@@ -27,15 +26,12 @@ export default class UserService {
         ];
     }
 
-    // Simulate API delay
     _delay(data, delay = 500) {
         return this.$timeout(() => data, delay);
     }
 
-    // Get all users
     getUsers() {
         return this.$q((resolve) => {
-            // Return users without passwords
             const sanitizedUsers = this.users.map(user => {
                 const { password, ...sanitizedUser } = user;
                 return sanitizedUser;
@@ -44,7 +40,6 @@ export default class UserService {
         });
     }
 
-    // Get user by ID
     getUserById(id) {
         return this.$q((resolve, reject) => {
             const user = this.users.find(u => u.id === id);
@@ -59,13 +54,11 @@ export default class UserService {
         });
     }
 
-    // Create new user
     createUser(userData) {
         return this.$q((resolve, reject) => {
-            // Validate required fields
             const requiredFields = ['username', 'firstName', 'lastName', 'email', 'type', 'password'];
             const missingFields = requiredFields.filter(field => !userData[field]);
-            
+
             if (missingFields.length > 0) {
                 this._delay(null).then(() => {
                     reject(new Error(`Missing required fields: ${missingFields.join(', ')}`));
@@ -73,8 +66,7 @@ export default class UserService {
                 return;
             }
 
-            // Check if username or email already exists
-            const userExists = this.users.some(u => 
+            const userExists = this.users.some(u =>
                 u.username === userData.username || u.email === userData.email
             );
 
@@ -85,7 +77,6 @@ export default class UserService {
                 return;
             }
 
-            // Create new user
             const newUser = {
                 ...userData,
                 id: this.users.length + 1
@@ -97,11 +88,10 @@ export default class UserService {
         });
     }
 
-    // Update user
     updateUser(id, userData) {
         return this.$q((resolve, reject) => {
             const index = this.users.findIndex(u => u.id === id);
-            
+
             if (index === -1) {
                 this._delay(null).then(() => {
                     reject(new Error('User not found'));
@@ -109,8 +99,7 @@ export default class UserService {
                 return;
             }
 
-            // Check if username or email is taken by another user
-            const userExists = this.users.some(u => 
+            const userExists = this.users.some(u =>
                 u.id !== id && (u.username === userData.username || u.email === userData.email)
             );
 
@@ -130,11 +119,10 @@ export default class UserService {
                 return;
             }
 
-            // Update user
             this.users[index] = {
                 ...this.users[index],
                 ...userData,
-                id // Ensure ID doesn't change
+                id
             };
 
             const { password, ...sanitizedUser } = this.users[index];
@@ -142,11 +130,10 @@ export default class UserService {
         });
     }
 
-    // Delete user
     deleteUser(id) {
         return this.$q((resolve, reject) => {
             const index = this.users.findIndex(u => u.id === id);
-            
+
             if (index === -1) {
                 this._delay(null).then(() => {
                     reject(new Error('User not found'));
@@ -158,4 +145,4 @@ export default class UserService {
             this._delay(true).then(resolve);
         });
     }
-} 
+}
