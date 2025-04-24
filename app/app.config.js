@@ -19,7 +19,7 @@ export function appConfig($routeProvider) {
             }
         })
         .otherwise({
-            redirectTo: '/'
+            redirectTo: '/error/404'
         });
 }
 

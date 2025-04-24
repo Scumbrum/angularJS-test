@@ -95,7 +95,7 @@ function copyIndex() {
 function watch() {
     browserSync.init({
         server: {
-            baseDir: './'
+            baseDir: './dist'
         }
     });
 
