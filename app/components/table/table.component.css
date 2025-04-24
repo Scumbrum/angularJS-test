@@ -1,9 +1,8 @@
-
 .table-component {
     width: 100%;
     height: 100%;
-    background-color: #fff;
-    box-shadow: 3px 2px 18px 0px #e6e5e5;
+    background-color: var(--color-bg-primary);
+    box-shadow: 3px 2px 18px 0px var(--color-gray-300);
     border-radius: 5px;
     overflow-x: auto;
 }
@@ -23,13 +22,13 @@
     padding: 12px 15px;
     line-height: 150%;
     text-align: left;
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid var(--color-bg-primary);
 }
 
 .table-component th {
     font-weight: 500;
-    color: #666;
-    background-color: #fff;
+    color: var(--color-text-secondary);
+    background-color: var(--color-bg-primary);
     text-transform: uppercase;
     font-size: 0.9em;
     user-select: none;
@@ -37,15 +36,15 @@
 }
 
 .table-component tr {
-    background-color: #F4F5F8;
+    background-color: var(--color-blue-200);
     font-size: 0.8em;
     cursor: pointer;
 }
 
 .table-component tr:hover {
-    background-color: #EFF0F4;
+    background-color: var(--color-blue-100);
 }
 
 .table-component td {
-    color: #333;
+    color: var(--color-text-primary);
 }

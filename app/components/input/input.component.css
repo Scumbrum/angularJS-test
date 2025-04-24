@@ -1,14 +1,13 @@
-
 .input-label {
     display: block;
     margin-bottom: 8px;
-    color: #333;
+    color: var(--color-text-primary);
     font-size: 14px;
     font-weight: 500;
 }
 
 .required-marker {
-    color: #e74c3c;
+    color: var(--color-error);
     margin-left: 2px;
 }
 
@@ -21,20 +20,20 @@
     padding: 10px 12px;
     font-size: 14px;
     line-height: 1.5;
-    color: #333;
-    background-color: #f0f0f0;
-    border: 1px solid #e9ecef;
+    color: var(--color-text-primary);
+    background-color: var(--color-gray-400);
+    border: 1px solid var(--color-border-default);
     border-radius: 4px;
     transition: all 0.2s ease;
 }
 
 .input-field:focus {
     outline: none;
-    border-color: #2196F3;
-    background-color: #F4F5F8;
-    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+    border-color: var(--color-button-primary);
+    background-color: var(--color-blue-200);
+    box-shadow: 0 0 0 3px var(--color-shadow-blue);
 }
 
 .input-field::placeholder {
-    color: #adb5bd;
+    color: var(--color-text-muted);
 }

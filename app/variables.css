@@ -1,3 +1,72 @@
 :root {
-    --bg-color: #EEF0F8;
+    /* Base Colors */
+    --color-white: #fff;
+    --color-black: #000;
+
+    /* Grays */
+    --color-gray-100: #f8f9fa;
+    --color-gray-200: #f5f5f5;
+    --color-gray-300: #f1f1f1;
+    --color-gray-400: #f0f0f0;
+    --color-gray-500: #e9ecef;
+    --color-gray-600: #ddd;
+    --color-gray-700: #ccc;
+    --color-gray-800: #666;
+    --color-gray-900: #333;
+
+    /* Blues */
+    --color-blue-100: #EFF0F4;
+    --color-blue-200: #F4F5F8;
+    --color-blue-300: #78bcf5;
+    --color-blue-400: #2196F3;
+    --color-blue-500: #1976D2;
+    --color-blue-600: #3498db;
+    --color-blue-700: #2980b9;
+
+    /* Reds */
+    --color-red-100: #f3a8c2;
+    --color-red-200: #F44682;
+    --color-red-300: #cd386c;
+    --color-red-400: #f44336;
+    --color-red-500: #dc3545;
+    --color-red-600: #e74c3c;
+
+    /* Greens */
+    --color-green-500: #4caf50;
+
+    /* Oranges */
+    --color-orange-500: #ff9800;
+
+    /* Text Colors */
+    --color-text-primary: var(--color-gray-900);
+    --color-text-secondary: var(--color-gray-800);
+    --color-text-muted: var(--color-gray-700);
+
+    /* Background Colors */
+    --color-bg-primary: var(--color-white);
+    --color-bg-secondary: var(--color-gray-100);
+    --color-bg-tertiary: var(--color-gray-200);
+    --bg-color: var(--color-blue-100); /* Keeping the original variable for backward compatibility */
+
+    /* Border Colors */
+    --color-border-light: var(--color-gray-600);
+    --color-border-default: var(--color-gray-500);
+
+    /* Shadow Colors */
+    --color-shadow-light: rgba(0, 0, 0, 0.1);
+    --color-shadow-medium: rgba(0, 0, 0, 0.15);
+    --color-shadow-blue: rgba(33, 150, 243, 0.1);
+    --color-shadow-blue-focus: rgba(33, 150, 243, 0.3);
+
+    /* Semantic Colors */
+    --color-success: var(--color-green-500);
+    --color-error: var(--color-red-500);
+    --color-warning: var(--color-orange-500);
+    --color-info: var(--color-blue-400);
+
+    /* Component Specific */
+    --color-button-primary: var(--color-blue-400);
+    --color-button-primary-hover: var(--color-blue-500);
+    --color-button-danger: var(--color-red-200);
+    --color-button-danger-hover: var(--color-red-300);
 }

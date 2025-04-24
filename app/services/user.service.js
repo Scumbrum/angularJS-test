@@ -123,7 +123,7 @@ export default class UserService {
 
             const isPasswordCorrent = this.users.some(u => u.id === userData.id && u.password === userData.password)
 
-            if (isPasswordCorrent) {
+            if (!isPasswordCorrent) {
                 this._delay(null).then(() => {
                     reject(new Error('Invalid user password'));
                 });

@@ -18,9 +18,6 @@ import { userDetailsResolver } from './pages/user-details/user-details.resolver'
 angular.module('myApp', ['ngRoute', 'templates', componentsModule, userListModule, userDetailsModule, ErrorModule, ServiceModule])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider
-            .when('/test', {
-                template: '<home-component></home-component>'
-            })
             .when('/', {
                 template: '<user-list-component></user-list-component>'
             })
