@@ -1,3 +1,5 @@
+import { ERROR_MESSAGES } from '../constants/validation.constants';
+
 export default class UserService {
     constructor($q, $timeout) {
         'ngInject';
@@ -51,7 +53,7 @@ export default class UserService {
                 resolve(data);
             } else {
                 await this._delay(null);
-                reject(new Error('User not found'));
+                reject(new Error(ERROR_MESSAGES.SERVER.USER_NOT_FOUND));
             }
         });
     }
@@ -63,7 +65,7 @@ export default class UserService {
 
             if (missingFields.length > 0) {
                 await this._delay(null);
-                reject(new Error(`Missing required fields: ${missingFields.join(', ')}`));
+                reject(new Error(ERROR_MESSAGES.SERVER.MISSING_FIELDS + missingFields.join(', ')));
                 return;
             }
 
@@ -73,7 +75,7 @@ export default class UserService {
 
             if (userExists) {
                 await this._delay(null);
-                reject(new Error('Username or email already exists'));
+                reject(new Error(ERROR_MESSAGES.SERVER.USERNAME_EMAIL_EXISTS));
                 return;
             }
 
@@ -95,7 +97,7 @@ export default class UserService {
 
             if (index === -1) {
                 await this._delay(null);
-                reject(new Error('User not found'));
+                reject(new Error(ERROR_MESSAGES.SERVER.USER_NOT_FOUND));
                 return;
             }
 
@@ -105,7 +107,7 @@ export default class UserService {
 
             if (userExists) {
                 await this._delay(null);
-                reject(new Error('Username or email already exists'));
+                reject(new Error(ERROR_MESSAGES.SERVER.USERNAME_EMAIL_EXISTS));
                 return;
             }
 
@@ -113,7 +115,7 @@ export default class UserService {
 
             if (!isPasswordCorrent) {
                 await this._delay(null);
-                reject(new Error('Invalid user password'));
+                reject(new Error(ERROR_MESSAGES.SERVER.INVALID_PASSWORD));
                 return;
             }
 
@@ -135,7 +137,7 @@ export default class UserService {
 
             if (index === -1) {
                 await this._delay(null);
-                reject(new Error('User not found'));
+                reject(new Error(ERROR_MESSAGES.SERVER.USER_NOT_FOUND));
                 return;
             }
 

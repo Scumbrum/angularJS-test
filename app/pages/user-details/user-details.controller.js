@@ -1,4 +1,5 @@
 import UserListController from "../user-list/user-list.controller";
+import { VALIDATION_PATTERNS, ERROR_MESSAGES, USER_TYPES } from '../../constants/validation.constants';
 
 class UserDetailsController {
     constructor(userService, toasterService, $route, $location) {
@@ -8,14 +9,11 @@ class UserDetailsController {
         this.$route = $route;
         this.$location = $location;
 
-        this.typeOptions = ['Admin', 'Driver'];
+        this.typeOptions = USER_TYPES;
         this.isEditMode = false;
 
         this.errors = {};
-        this.validationPatterns = {
-            email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-            password: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
-        };
+        this.validationPatterns = VALIDATION_PATTERNS;
     }
 
     $onInit() {
@@ -40,60 +38,58 @@ class UserDetailsController {
             repeatPassword: '',
             type: ''
         };
-
-    
     }
 
     validateForm() {
         this.errors = {};
 
         if (!this.editedUser.username) {
-            this.errors.username = 'Username is required';
+            this.errors.username = ERROR_MESSAGES.REQUIRED_FIELDS.USERNAME;
         }
 
         if (!this.editedUser.firstName) {
-            this.errors.first_name = 'First name is required';
+            this.errors.first_name = ERROR_MESSAGES.REQUIRED_FIELDS.FIRST_NAME;
         }
 
         if (!this.editedUser.lastName) {
-            this.errors.last_name = 'Last name is required';
+            this.errors.last_name = ERROR_MESSAGES.REQUIRED_FIELDS.LAST_NAME;
         }
 
         if (!this.editedUser.email) {
-            this.errors.email = 'Email is required';
-        } else if (!this.validationPatterns.email.test(this.editedUser.email)) {
-            this.errors.email = 'Please enter a valid email address';
+            this.errors.email = ERROR_MESSAGES.REQUIRED_FIELDS.EMAIL;
+        } else if (!this.validationPatterns.EMAIL.test(this.editedUser.email)) {
+            this.errors.email = ERROR_MESSAGES.VALIDATION.EMAIL;
         }
 
         if (!this.editedUser.password) {
-            this.errors.password = 'Password is required';
-        } else if (!this.validationPatterns.password.test(this.editedUser.password)) {
-            this.errors.password = 'Password must be at least 8 characters long and contain at least one letter and one number';
+            this.errors.password = ERROR_MESSAGES.REQUIRED_FIELDS.PASSWORD;
+        } else if (!this.validationPatterns.PASSWORD.test(this.editedUser.password)) {
+            this.errors.password = ERROR_MESSAGES.VALIDATION.PASSWORD;
         }
 
         if (!this.editedUser.repeatPassword) {
-            this.errors.repeatPassword = 'Repeat password is required';
+            this.errors.repeatPassword = ERROR_MESSAGES.REQUIRED_FIELDS.REPEAT_PASSWORD;
         } else if (this.editedUser.password !== this.editedUser.repeatPassword) {
-            this.errors.repeatPassword = 'Password not matched';
+            this.errors.repeatPassword = ERROR_MESSAGES.VALIDATION.PASSWORD_MATCH;
         }
 
         if (!this.editedUser.type) {
-            this.errors.type = 'User type is required';
+            this.errors.type = ERROR_MESSAGES.REQUIRED_FIELDS.TYPE;
         } else if (!this.typeOptions.includes(this.editedUser.type)) {
-            this.errors.type = 'Invalid user type';
+            this.errors.type = ERROR_MESSAGES.VALIDATION.TYPE;
         }
 
         return Object.keys(this.errors).length === 0;
     }
 
     handleServerErrors(error) {
-        if (error.message.includes('Username already exists')) {
-            this.errors.username = 'This username is already taken';
-        } else if (error.message.includes('Email already exists')) {
-            this.errors.email = 'This email is already registered';
-        } else if (error.message.includes('User not found')) {
+        if (error.message.includes(ERROR_MESSAGES.SERVER.USERNAME_EXISTS)) {
+            this.errors.username = ERROR_MESSAGES.SERVER.USERNAME_EXISTS;
+        } else if (error.message.includes(ERROR_MESSAGES.SERVER.EMAIL_EXISTS)) {
+            this.errors.email = ERROR_MESSAGES.SERVER.EMAIL_EXISTS;
+        } else if (error.message.includes(ERROR_MESSAGES.SERVER.USER_NOT_FOUND)) {
             this.$location.path('/error/404');
-        } else if (error.message.includes('Invalid user password')) {
+        } else if (error.message.includes(ERROR_MESSAGES.SERVER.INVALID_PASSWORD)) {
             this.$location.path('/error/403');
         } else {
             this.toasterService.error(error.message);
@@ -106,7 +102,7 @@ class UserDetailsController {
 
     saveChanges() {
         if (!this.validateForm()) {
-            this.toasterService.error('Please fix the errors in the form');
+            this.toasterService.error(ERROR_MESSAGES.FORM.FIX_ERRORS);
             return;
         }
 
@@ -117,7 +113,7 @@ class UserDetailsController {
         savePromise
             .then(() => {
                 this.toasterService.success(
-                    this.isEditMode ? 'User updated successfully' : 'User created successfully'
+                    this.isEditMode ? ERROR_MESSAGES.FORM.USER_UPDATED : ERROR_MESSAGES.FORM.USER_CREATED
                 );
                 this.goToList();
             })
@@ -129,7 +125,7 @@ class UserDetailsController {
     deleteUser() {
         this.userService.deleteUser(this.editedUser.id)
             .then(() => {
-                this.toasterService.success('User deleted successfully');
+                this.toasterService.success(ERROR_MESSAGES.FORM.USER_DELETED);
                 this.goToList();
             })
             .catch(error => {
